@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">beeHealthy</string>
+    <string name="NomeCompleto">Nome Completo</string>
+    <string name="Email">Email</string>
+    <string name="Senha">Senha</string>
+    <string name="inscrição">Estou me inscrevendo no \beeHealthy para ser:</string>
+    <string name="Paciente">Paciente</string>
+    <string name="Nutricionista">Nutricionista</string>
+    <string name="Inscrever">Inscrever-se</string>
+    <string name="Esp">Especialiação</string>
+    <string name="Nome">Nome</string>
+    <string name="tel">Telefone</string>
+    <string name="End">Endereço</string>
+    <string name="busca">Digite o nome do nutricionista</string>
+    <string name="title_activity_menu_lateral">MenuLateral</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="Pesquisa">Digite o a palavra para a busca</string>
+    <string name="LogOut">Sair</string>
+    <string name="consulta">Agendar Consulta</string>
+    <string name="connect_error">Erro na conexão</string>
+    <string name="web_service_url">https://e1a71dd4.ngrok.io</string>
+    <string name="no_data_available">Busque por um nutricionista</string>
+    <string name="nEncontrado">\"Não Encontrado\"</string>
+    <string name="Data">Data:</string>
+    <string name="Local">Local:</string>
+    <string name="ConsultaMarcada">Consultas Marcadas</string>
+    <string name="CRN">CRN</string>
+    <string name="title_activity_nutritionist_menu">NutritionistMenu</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
