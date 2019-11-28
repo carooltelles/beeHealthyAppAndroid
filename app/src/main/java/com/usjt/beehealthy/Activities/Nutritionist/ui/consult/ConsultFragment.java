@@ -1,5 +1,7 @@
 package com.usjt.beehealthy.Activities.Nutritionist.ui.consult;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +14,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
@@ -33,7 +38,8 @@ public class ConsultFragment extends Fragment {
     private ConsultViewModel consultViewModel;
     private RequestQueue requestQueue;
     private List<Consult> consults;
-    ListView consultList;
+    public ListView consultList;
+    public RecyclerView consultRecycler;
     TextView textView;
 
 
@@ -45,14 +51,11 @@ public class ConsultFragment extends Fragment {
         try {
             consults = new ArrayList<Consult>();
             Nutritionist nutritionist = (Nutritionist) getActivity().getIntent().getExtras().get("Nutritionist");
-            //Nutritionist nutritionist = (Nutritionist) getActivity().getIntent().getSerializableExtra("Nutritionist");
             getConsultsByNutritionist(nutritionist.getIduser());
-
-            consultList = (ListView) root.findViewById(R.id.consult_list);
-            textView = root.findViewById(R.id.consult_text);
+            consultRecycler = root.findViewById(R.id.consult_list_recycler);
 
         } catch (Exception e) {
-
+            throw e;
         }
 //        ConsultAdapter adapter = new ConsultAdapter(consults,getActivity() );
 //
@@ -60,6 +63,14 @@ public class ConsultFragment extends Fragment {
 
 
         return root;
+    }
+
+    public void setList(){
+        LinearLayoutManager linear = new LinearLayoutManager(getContext());
+        consultRecycler.setLayoutManager(linear);
+        ConsultAdapter adapter = new ConsultAdapter(consults);
+        adapter.notifyDataSetChanged();
+        consultRecycler.setAdapter(adapter);
     }
 
 
@@ -71,18 +82,14 @@ public class ConsultFragment extends Fragment {
                 (response) -> {
 
                     try {
-                        Toast.makeText(getContext(), response.toString(), Toast.LENGTH_LONG).show();
                         System.out.println(response);
                         consults = Util.populateConsultList(response);
-
-                        //colocar aki o resto
-                        consultViewModel = ViewModelProviders.of(this).get(ConsultViewModel.class);
-                        ArrayAdapter<Consult> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, consults);
-                        //ConsultAdapter adapter = new ConsultAdapter(consults,getContext());
-                        consultList.setAdapter(adapter);
+                        setList();
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
+
+
 
 
 

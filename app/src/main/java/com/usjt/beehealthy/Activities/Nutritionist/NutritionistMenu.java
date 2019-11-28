@@ -13,6 +13,9 @@ import com.usjt.beehealthy.R;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.ListFragment;
 
 public class NutritionistMenu extends AppCompatActivity {
 
@@ -27,11 +30,16 @@ public class NutritionistMenu extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             item -> {
+                FragmentManager fragmentManager =  getSupportFragmentManager();
                 Fragment selectedFragment = null;
 
                 switch (item.getItemId()) {
                     case R.id.navigation_consults:
+                        ListFragment listFragment = new ListFragment();
+                        FragmentTransaction transaction = fragmentManager.beginTransaction();
+                        transaction.add(R.id.consult_list_recycler, listFragment);
                         selectedFragment = new ConsultFragment();
+
                         break;
                     case R.id.navigation_home:
                         selectedFragment = new HomeFragment();
@@ -40,12 +48,14 @@ public class NutritionistMenu extends AppCompatActivity {
                         selectedFragment = new NotificationsFragment();
                         break;
                     case R.id.navigation_profile:
+
                         selectedFragment = new ProfileFragment();
+
                         break;
                 }
 
-                getSupportFragmentManager().
-                        beginTransaction().replace(R.id.nutritionist_container,
+
+                fragmentManager.beginTransaction().replace(R.id.nutritionist_container,
                         selectedFragment).commit();
 
                 return true;

@@ -9,40 +9,60 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.usjt.beehealthy.Model.Consult;
 import com.usjt.beehealthy.R;
 import java.util.List;
 
-public class ConsultAdapter extends ArrayAdapter<Consult> {
+public class ConsultAdapter extends RecyclerView.Adapter<ConsultAdapter.ConsultViewHolder> {
 
     private List<Consult> consults;
-    private Context context;
 
-    public ConsultAdapter (List<Consult> consults, Context context){
-        super(context, R.layout.consult_layout_list, consults);
-        this.consults = consults;
-        this.context = context;
+    public ConsultAdapter (List<Consult> consults){ this.consults = consults;  }
+
+
+    @NonNull
+    @Override
+    public ConsultViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.consult_layout_list, parent, false);
+        ConsultAdapter.ConsultViewHolder consultHolder = new ConsultViewHolder(view, parent.getContext());
+        return consultHolder;
     }
 
-    @Override public int getCount() { return consults.size(); }
+    @Override
+    public void onBindViewHolder(@NonNull ConsultViewHolder holder, int position) {
 
-    @Override public Consult getItem(int position) { return consults.get(position); }
+
+        if (consults != null && consults.size() > 0) {
+            Consult consult = consults.get(position);
+            holder.date.setText(consult.getDate());
+            holder.patientName.setText(consult.getPatient().getFullname());
+            holder.place.setText(consult.getPlace());
+        }
+    }
 
     @Override public long getItemId(int position) { return consults.get(position).getIdconsult(); }
 
-    @Override public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.consult_layout_list, parent, false);
-        Consult consult = consults.get(position);
+    public int getItemCount() { return consults.size(); }
 
-        TextView patientName = (TextView) view.findViewById(R.id.patient_name);
-        TextView consultDate = (TextView) view.findViewById(R.id.consult_date);
-        TextView consultPlace = (TextView) view.findViewById(R.id.consult_place);
+    public Consult getItem(int position) { return consults.get(position); }
 
-        patientName.setText(consult.getPatient().getFullname());
-        consultDate.setText(consult.getDate());
-        consultPlace.setText(consult.getPlace());
 
-        return view;
+    public class ConsultViewHolder extends RecyclerView.ViewHolder {
+
+        public TextView place;
+        public TextView patientName;
+        public TextView date;
+
+        public ConsultViewHolder(@NonNull View itemView, final Context context){
+            super(itemView);
+            place = itemView.findViewById(R.id.consult_place);
+            patientName =  itemView.findViewById(R.id.patient_name);
+            date =  itemView.findViewById(R.id.consult_date);
+
+        }
     }
 }
