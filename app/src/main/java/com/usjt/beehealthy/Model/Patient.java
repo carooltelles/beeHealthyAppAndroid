@@ -21,6 +21,15 @@ public class Patient extends User implements Serializable{
         this.description = description;
     }
 
+    public Patient(String email, String fullname, String birthday, Double weight, Double height,String description ) {
+        this.email = email;
+        this.fullname = fullname;
+        this.birthday = birthday;
+        this.weight = weight;
+        this.height = height;
+        this.description = description;
+    }
+
     public Patient(){
 
     }

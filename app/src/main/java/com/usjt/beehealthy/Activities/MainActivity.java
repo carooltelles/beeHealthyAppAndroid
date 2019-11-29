@@ -127,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 (excecao) -> {
                     NetworkResponse response = excecao.networkResponse;
                     if (response.statusCode == 404) {
+
                         Toast.makeText(
                                 this,
                                 "Login Inválido",

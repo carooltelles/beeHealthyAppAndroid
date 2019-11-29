@@ -35,12 +35,9 @@ import java.util.List;
 
 public class ConsultFragment extends Fragment {
 
-    private ConsultViewModel consultViewModel;
     private RequestQueue requestQueue;
     private List<Consult> consults;
-    public ListView consultList;
     public RecyclerView consultRecycler;
-    TextView textView;
 
 
     @Nullable
@@ -49,7 +46,7 @@ public class ConsultFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_consult, container, false);
         try {
-            consults = new ArrayList<Consult>();
+            consults = new ArrayList<>();
             Nutritionist nutritionist = (Nutritionist) getActivity().getIntent().getExtras().get("Nutritionist");
             getConsultsByNutritionist(nutritionist.getIduser());
             consultRecycler = root.findViewById(R.id.consult_list_recycler);
@@ -57,11 +54,6 @@ public class ConsultFragment extends Fragment {
         } catch (Exception e) {
             throw e;
         }
-//        ConsultAdapter adapter = new ConsultAdapter(consults,getActivity() );
-//
-//        consultList.setAdapter(adapter);
-
-
         return root;
     }
 
@@ -75,12 +67,10 @@ public class ConsultFragment extends Fragment {
 
 
     public void getConsultsByNutritionist(Long id) {
-
         requestQueue = Volley.newRequestQueue(getActivity());
         String url = getString(R.string.web_service_url) + "/consult/nutritionist/" + id;
         JsonArrayRequest request = new JsonArrayRequest(Method.GET, url, null,
                 (response) -> {
-
                     try {
                         System.out.println(response);
                         consults = Util.populateConsultList(response);
@@ -88,11 +78,6 @@ public class ConsultFragment extends Fragment {
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
-
-
-
-
-
                 },
                 (exception) -> {
                     Toast.makeText(

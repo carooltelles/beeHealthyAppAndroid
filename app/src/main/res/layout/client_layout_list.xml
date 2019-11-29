@@ -13,42 +13,30 @@
         android:orientation="vertical"
         tools:layout_editor_absoluteX="1dp">
 
-        <TextView
 
-            android:id="@+id/consult_date"
-            android:layout_width="138dp"
-            android:layout_height="32dp"
+        <TextView
+            android:id="@+id/client_fullname"
+            android:layout_width="230dp"
+            android:layout_height="35dp"
             android:text="TextView"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.94"
+            app:layout_constraintHorizontal_bias="0.91"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.262" />
+            app:layout_constraintVertical_bias="0.635" />
 
         <TextView
-            android:id="@+id/patient_name"
-            android:layout_width="138dp"
-            android:layout_height="32dp"
+            android:id="@+id/client_email"
+            android:layout_width="228dp"
+            android:layout_height="37dp"
             android:text="TextView"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.387"
+            app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.262" />
-
-        <TextView
-            android:id="@+id/consult_place"
-            android:layout_width="138dp"
-            android:layout_height="32dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.94"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.686" />
+            app:layout_constraintVertical_bias="0.18" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

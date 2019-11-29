@@ -5,7 +5,9 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 
 import com.usjt.beehealthy.Model.Consult;
+import com.usjt.beehealthy.Model.NutritionalPlan;
 import com.usjt.beehealthy.Model.Nutritionist;
+import com.usjt.beehealthy.Model.NutritionistClient;
 import com.usjt.beehealthy.Model.Patient;
 
 import org.json.JSONArray;
@@ -126,5 +128,77 @@ public class Util {
         nutritionistObject.put("specialization", nutritionist.getSpecialization());
         return nutritionistObject;
     }
+
+    public static List<NutritionistClient> clientsObj(JSONArray clientsArray) throws JSONException {
+        List<NutritionistClient> clients = new ArrayList<>();
+
+        for(int i = 0; i < clientsArray.length(); i++){
+            JSONObject clientObject = clientsArray.getJSONObject(i);
+            JSONObject patientObject = clientObject.getJSONObject("patient");
+            Long idclient = clientObject.getLong("idclient");
+            String patientEmail = patientObject.getString("email");
+            String patientFullname = patientObject.getString("fullname");
+            String patientBirthday = patientObject.getString("birthday");
+            Double weight = patientObject.getDouble("weight");
+            Double height = patientObject.getDouble("height");
+            String description = patientObject.getString("description");
+
+            Patient patient = new Patient(
+                    patientEmail, patientFullname, patientBirthday, weight, height, description);
+
+            clients.add(new NutritionistClient(idclient,patient));
+        }
+
+        return clients;
+    }
+
+    public static List<NutritionalPlan> populatePlan (JSONArray planArray) throws Exception{
+        List<NutritionalPlan> plans = new ArrayList<>();
+
+
+        for (int i = 0; i < planArray.length(); i++){
+
+            JSONObject planObject = planArray.getJSONObject(i);
+            Long idplan = planObject.getLong("idplan");
+            String weekDay = planObject.getString("weekDay");
+            String breakfast = planObject.getString("breakfast");
+            String lunch = planObject.getString("lunch");
+            String dinner = planObject.getString("dinner");
+
+            JSONObject nutritionistObject = planObject.getJSONObject("nutritionist");
+
+            Long idnutritionist = nutritionistObject.getLong("iduser");
+            String nutritionistEmail = nutritionistObject.getString("email");
+            String nutritionistFullname = nutritionistObject.getString("fullname");
+            String nutritionistBirthday = nutritionistObject.getString("birthday");
+            String specialization = nutritionistObject.getString("specialization");
+            String crn = nutritionistObject.getString("crn");
+
+
+            JSONObject patientObject = planObject.getJSONObject("patient");
+            Long idpatient = patientObject.getLong("iduser");
+            String patientEmail = patientObject.getString("email");
+            String patientFullname = patientObject.getString("fullname");
+            String patientBirthday = patientObject.getString("birthday");
+            Double weight = patientObject.getDouble("weight");
+            Double height = patientObject.getDouble("height");
+            String description = patientObject.getString("description");
+
+
+            Patient patient = new Patient(
+                    idpatient, patientEmail, patientFullname, patientBirthday, weight, height, description);
+
+            Nutritionist nutritionist = new Nutritionist(
+                    idnutritionist, nutritionistEmail, nutritionistFullname, nutritionistBirthday, specialization, crn);
+
+            NutritionalPlan plan = new NutritionalPlan(idplan,weekDay, breakfast,lunch,dinner, nutritionist, patient );
+
+            plans.add(plan);
+        }
+
+        return plans;
+
+    }
+
 
 }

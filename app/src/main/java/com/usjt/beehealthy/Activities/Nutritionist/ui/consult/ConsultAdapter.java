@@ -5,8 +5,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,7 +33,6 @@ public class ConsultAdapter extends RecyclerView.Adapter<ConsultAdapter.ConsultV
     @Override
     public void onBindViewHolder(@NonNull ConsultViewHolder holder, int position) {
 
-
         if (consults != null && consults.size() > 0) {
             Consult consult = consults.get(position);
             holder.date.setText(consult.getDate());
@@ -62,6 +59,12 @@ public class ConsultAdapter extends RecyclerView.Adapter<ConsultAdapter.ConsultV
             place = itemView.findViewById(R.id.consult_place);
             patientName =  itemView.findViewById(R.id.patient_name);
             date =  itemView.findViewById(R.id.consult_date);
+
+
+            itemView.setOnClickListener(v -> {
+                System.out.println("Clicou");
+            });
+
 
         }
     }

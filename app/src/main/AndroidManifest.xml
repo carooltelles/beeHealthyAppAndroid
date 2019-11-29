@@ -9,6 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".Activities.Nutritionist.ui.client.NutritionalPlanActivity"></activity>
+        <activity
+            android:name=".Activities.Nutritionist.ui.client.ClientDetails"
+            android:label="@string/title_activity_client_details"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity android:name=".Activities.Register.RegisterActivity" />
         <activity
             android:name=".Activities.Nutritionist.NutritionistMenu"
