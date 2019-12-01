@@ -134,8 +134,12 @@ public class Util {
 
         for(int i = 0; i < clientsArray.length(); i++){
             JSONObject clientObject = clientsArray.getJSONObject(i);
-            JSONObject patientObject = clientObject.getJSONObject("patient");
+
             Long idclient = clientObject.getLong("idclient");
+
+            JSONObject patientObject = clientObject.getJSONObject("patient");
+
+            Long iduser = patientObject.getLong("iduser");
             String patientEmail = patientObject.getString("email");
             String patientFullname = patientObject.getString("fullname");
             String patientBirthday = patientObject.getString("birthday");
@@ -143,10 +147,21 @@ public class Util {
             Double height = patientObject.getDouble("height");
             String description = patientObject.getString("description");
 
-            Patient patient = new Patient(
-                    patientEmail, patientFullname, patientBirthday, weight, height, description);
+            JSONObject nutritionistObject = clientObject.getJSONObject("nutritionist");
+            Long idnutritionist = nutritionistObject.getLong("iduser");
+            String nutritionistEmail = nutritionistObject.getString("email");
+            String nutritionistFullname = nutritionistObject.getString("fullname");
+            String nutritionistBirthday = nutritionistObject.getString("birthday");
+            String specialization = nutritionistObject.getString("specialization");
+            String crn = nutritionistObject.getString("crn");
 
-            clients.add(new NutritionistClient(idclient,patient));
+            Patient patient = new Patient(
+                    iduser, patientEmail, patientFullname, patientBirthday, weight, height, description);
+
+            Nutritionist nutritionist = new Nutritionist(
+                    idnutritionist, nutritionistEmail, nutritionistFullname, nutritionistBirthday, specialization, crn);
+
+            clients.add(new NutritionistClient(idclient,patient, nutritionist));
         }
 
         return clients;
@@ -198,6 +213,63 @@ public class Util {
 
         return plans;
 
+    }
+
+
+
+    public static NutritionalPlan getPlan(JSONObject planObject) throws Exception{
+
+
+        Long idplan = planObject.getLong("idplan");
+        String weekDay = planObject.getString("weekDay");
+        String breakfast = planObject.getString("breakfast");
+        String lunch = planObject.getString("lunch");
+        String dinner = planObject.getString("dinner");
+
+        JSONObject nutritionistObject = planObject.getJSONObject("nutritionist");
+
+        Long idnutritionist = nutritionistObject.getLong("iduser");
+        String nutritionistEmail = nutritionistObject.getString("email");
+        String nutritionistFullname = nutritionistObject.getString("fullname");
+        String nutritionistBirthday = nutritionistObject.getString("birthday");
+        String specialization = nutritionistObject.getString("specialization");
+        String crn = nutritionistObject.getString("crn");
+
+
+        JSONObject patientObject = planObject.getJSONObject("patient");
+        Long idpatient = patientObject.getLong("iduser");
+        String patientEmail = patientObject.getString("email");
+        String patientFullname = patientObject.getString("fullname");
+        String patientBirthday = patientObject.getString("birthday");
+        Double weight = patientObject.getDouble("weight");
+        Double height = patientObject.getDouble("height");
+        String description = patientObject.getString("description");
+
+
+        Patient patient = new Patient(
+                idpatient, patientEmail, patientFullname, patientBirthday, weight, height, description);
+
+        Nutritionist nutritionist = new Nutritionist(
+                idnutritionist, nutritionistEmail, nutritionistFullname, nutritionistBirthday, specialization, crn);
+
+        NutritionalPlan plan = new NutritionalPlan(idplan,weekDay, breakfast,lunch,dinner, nutritionist, patient );
+
+        return plan;
+    }
+
+
+    public static JSONObject filPlan
+            (String weekday,String breakfast, String lunch, String dinner, Long idnutritionist, Long idpatient) throws JSONException {
+        JSONObject planObject = new JSONObject();
+
+        planObject.put("weekDay", weekday);
+        planObject.put("lunch", lunch);
+        planObject.put("breakfast", breakfast);
+        planObject.put("dinner", dinner);
+        planObject.put("idnutritionist", idnutritionist);
+        planObject.put("idpatient", idpatient);
+
+        return planObject;
     }
 
 

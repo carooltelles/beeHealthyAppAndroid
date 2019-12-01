@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.usjt.beehealthy.Model.NutritionalPlan;
-import com.usjt.beehealthy.Model.NutritionistClient;
 import com.usjt.beehealthy.R;
 
 import java.util.List;
@@ -19,6 +18,9 @@ import java.util.List;
 public class NutritionalPlanAdapter extends RecyclerView.Adapter<NutritionalPlanAdapter.PlanViewHolder>{
 
     public List<NutritionalPlan> plans;
+    public NutritionalPlan plan;
+
+    public NutritionalPlanAdapter (List<NutritionalPlan> plans){ this.plans = plans;  }
 
     @NonNull
     @Override
@@ -53,8 +55,8 @@ public class NutritionalPlanAdapter extends RecyclerView.Adapter<NutritionalPlan
             weekday = itemView.findViewById(R.id.planWeekday);
 
             itemView.setOnClickListener(v -> {
-                NutritionalPlan plan = plans.get(getLayoutPosition());
-                Intent intent = new Intent(context, ClientDetails.class);
+                Intent intent = new Intent(context, NutritionistPlanDetail.class);
+                plan = plans.get(getLayoutPosition());
                 intent.putExtra("plan", plan);
                 context.startActivity(intent);
             });

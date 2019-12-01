@@ -1,20 +1,29 @@
 package com.usjt.beehealthy.Activities.Nutritionist.ui.client;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.usjt.beehealthy.Model.NutritionalPlan;
+import com.usjt.beehealthy.Model.Nutritionist;
 import com.usjt.beehealthy.Model.NutritionistClient;
 import com.usjt.beehealthy.Model.Patient;
 import com.usjt.beehealthy.R;
 import com.usjt.beehealthy.Utilities.Util;
 
+import org.json.JSONException;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class NutritionalPlanActivity extends AppCompatActivity {
@@ -22,8 +31,8 @@ public class NutritionalPlanActivity extends AppCompatActivity {
     public Bundle bundle = new Bundle();
     public RequestQueue requestQueue;
     public List<NutritionalPlan> plans;
-    public Long idnutritionist;
-    public Patient patient;
+    public NutritionistClient client;
+    public RecyclerView planRecycler;
 
 
     @Override
@@ -31,24 +40,52 @@ public class NutritionalPlanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nutritional_plan);
 
-        bundle = getIntent().getExtras();
+        try{
+            plans = new ArrayList<NutritionalPlan>();
+            bundle = getIntent().getExtras();
+            client = (NutritionistClient) bundle.getSerializable("client");
+            getPlans(client.getNutritionist().getIduser(), client.getPatient().getIduser());
+            planRecycler = findViewById(R.id.plan_list_recycler);
 
 
+            FloatingActionButton fab = findViewById(R.id.plan_fab_save);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    try {
+                       // updatePlan(plan.getIdplan());
+                    } catch (Exception e) {
+                        try {
+                            throw e;
+                        } catch (JSONException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
 
+                }
+            });
+        }catch(Exception e){
+            throw e;
+        }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getPlans(client.getNutritionist().getIduser(), client.getPatient().getIduser());
+    }
 
-
-    public void getPlans(Long id) {
+    public void getPlans(Long idnutritionist, Long idpatient) {
 
         requestQueue = Volley.newRequestQueue(this);
-        String url = getString(R.string.web_service_url) + "/client/" + id;
+        String url = getString(R.string.web_service_url) + "/plan/nutritionist/" + idnutritionist + "/patient/" + idpatient;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 (response) -> {
 
                     try {
+
                         plans = Util.populatePlan(response);
-                        // setList();
+                        setList();
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -63,5 +100,14 @@ public class NutritionalPlanActivity extends AppCompatActivity {
                 });
 
         requestQueue.add(request);
+    }
+
+
+    public void setList(){
+        LinearLayoutManager linear = new LinearLayoutManager(this);
+        planRecycler.setLayoutManager(linear);
+        NutritionalPlanAdapter adapter = new NutritionalPlanAdapter(plans);
+        adapter.notifyDataSetChanged();
+        planRecycler.setAdapter(adapter);
     }
 }

@@ -35,8 +35,13 @@ public class NutritionalPlan implements Serializable{
         this.patient = patient;
     }
 
+    public Long getIdplan() {
+        return idplan;
+    }
 
-
+    public void setIdplan(Long idplan) {
+        this.idplan = idplan;
+    }
 
     public String getWeekDay() {
         return weekDay;

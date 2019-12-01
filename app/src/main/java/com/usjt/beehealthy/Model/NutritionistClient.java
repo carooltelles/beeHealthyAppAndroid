@@ -8,9 +8,10 @@ public class NutritionistClient implements Serializable{
     public Nutritionist nutritionist;
     public Patient patient;
 
-    public NutritionistClient(Long idclient, Patient patient){
+    public NutritionistClient(Long idclient, Patient patient, Nutritionist nutritionist){
         this.idclient = idclient;
         this.patient = patient;
+        this.nutritionist = nutritionist;
     }
 
 

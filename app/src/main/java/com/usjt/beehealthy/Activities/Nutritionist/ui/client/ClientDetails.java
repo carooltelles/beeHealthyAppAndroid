@@ -19,7 +19,6 @@ import com.usjt.beehealthy.R;
 public class ClientDetails extends AppCompatActivity {
 
     private NutritionistClient client;
-    private Nutritionist nutritionist;
     private TextInputEditText fullname, email, birthday, weight, height, description ;
     private Bundle bundle = new Bundle();
 
@@ -33,7 +32,6 @@ public class ClientDetails extends AppCompatActivity {
 
         bundle = getIntent().getExtras();
         client = (NutritionistClient) bundle.getSerializable("client");
-        nutritionist = (Nutritionist) bundle.getSerializable("nutritionist");
 
         initComponents();
         fillFields();
@@ -42,7 +40,6 @@ public class ClientDetails extends AppCompatActivity {
         fab.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), NutritionalPlanActivity.class);
             intent.putExtra("client", client);
-            intent.putExtra("idnutritionist", nutritionist.getIduser());
             startActivity(intent);
         });
     }

@@ -50,7 +50,7 @@ public class ClientsFragment extends Fragment {
     public void getClients(Long id) {
 
         requestQueue = Volley.newRequestQueue(getActivity());
-        String url = getString(R.string.web_service_url) + "/client/" + id;
+        String url = getString(R.string.web_service_url) + "/client/nutritionist/" + id;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 (response) -> {
 
@@ -75,7 +75,6 @@ public class ClientsFragment extends Fragment {
     }
 
     public void setList(){
-        System.out.println("entrou no set list");
         LinearLayoutManager linear = new LinearLayoutManager(getContext());
         clientRecycler.setLayoutManager(linear);
         ClientAdapter adapter = new ClientAdapter(clients);

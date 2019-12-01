@@ -73,14 +73,18 @@
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:orientation="horizontal">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="57dp"
-            app:errorEnabled="true"
-            tools:layout_editor_absoluteX="78dp"
-            tools:layout_editor_absoluteY="222dp">
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="140dp"
+                    android:layout_height="57dp"
+                    app:errorEnabled="true"
+                    tools:layout_editor_absoluteX="78dp"
+                    tools:layout_editor_absoluteY="222dp">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/client_height_details"
                 android:layout_width="match_parent"
@@ -92,7 +96,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
+            android:layout_width="140dp"
             android:layout_height="57dp"
             app:errorEnabled="true"
             tools:layout_editor_absoluteX="78dp"
@@ -107,6 +111,10 @@
                 android:hint="Peso"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
