@@ -36,7 +36,7 @@ public class ClientDetails extends AppCompatActivity {
         initComponents();
         fillFields();
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.plan_list);
         fab.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), NutritionalPlanActivity.class);
             intent.putExtra("client", client);

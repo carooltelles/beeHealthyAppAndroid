@@ -10,8 +10,9 @@ public class Nutritionist extends User implements Serializable{
 
     public String specialization;
     public String crn;
+    public String address;
 
-    public Nutritionist(Long iduser , String email, String fullname,String password, String birthday, String specialization, String crn) {
+    public Nutritionist(Long iduser , String email, String fullname,String password, String birthday, String specialization, String crn, String address) {
         this.iduser = iduser;
         this.email = email;
         this.password = password;
@@ -19,15 +20,17 @@ public class Nutritionist extends User implements Serializable{
         this.birthday = birthday;
         this.specialization = specialization;
         this.crn = crn;
+        this.address = address;
     }
 
-    public Nutritionist(Long iduser , String email, String fullname, String birthday, String specialization, String crn) {
+    public Nutritionist(Long iduser , String email, String fullname, String birthday, String specialization, String crn, String address) {
         this.iduser = iduser;
         this.email = email;
         this.fullname = fullname;
         this.birthday = birthday;
         this.specialization = specialization;
         this.crn = crn;
+        this.address = address;
     }
 
     public Nutritionist(){
@@ -50,4 +53,11 @@ public class Nutritionist extends User implements Serializable{
         this.crn = crn;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }

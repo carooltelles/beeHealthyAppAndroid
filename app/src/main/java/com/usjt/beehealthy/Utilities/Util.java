@@ -4,6 +4,7 @@ import android.provider.MediaStore;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import com.usjt.beehealthy.Model.Articles;
 import com.usjt.beehealthy.Model.Consult;
 import com.usjt.beehealthy.Model.NutritionalPlan;
 import com.usjt.beehealthy.Model.Nutritionist;
@@ -91,6 +92,7 @@ public class Util {
             Long idnutritionist = nutritionistObject.getLong("iduser");
             String nutritionistEmail = nutritionistObject.getString("email");
             String nutritionistFullname = nutritionistObject.getString("fullname");
+            String nutritionistAdress = nutritionistObject.getString("address");
             String nutritionistBirthday = nutritionistObject.getString("birthday");
             String specialization = nutritionistObject.getString("specialization");
             String crn = nutritionistObject.getString("crn");
@@ -103,7 +105,7 @@ public class Util {
             String description = patientObject.getString("description");
 
             Nutritionist nutritionist = new Nutritionist(
-                    idnutritionist, nutritionistEmail, nutritionistFullname, nutritionistBirthday, specialization, crn);
+                    idnutritionist, nutritionistEmail, nutritionistFullname, nutritionistBirthday, specialization, crn, nutritionistAdress);
 
             Patient patient = new Patient(
                     idpatient, patientEmail, patientFullname, patientBirthday, weight, height, description);
@@ -150,6 +152,7 @@ public class Util {
             JSONObject nutritionistObject = clientObject.getJSONObject("nutritionist");
             Long idnutritionist = nutritionistObject.getLong("iduser");
             String nutritionistEmail = nutritionistObject.getString("email");
+            String nutritionistAdress = nutritionistObject.getString("address");
             String nutritionistFullname = nutritionistObject.getString("fullname");
             String nutritionistBirthday = nutritionistObject.getString("birthday");
             String specialization = nutritionistObject.getString("specialization");
@@ -159,7 +162,7 @@ public class Util {
                     iduser, patientEmail, patientFullname, patientBirthday, weight, height, description);
 
             Nutritionist nutritionist = new Nutritionist(
-                    idnutritionist, nutritionistEmail, nutritionistFullname, nutritionistBirthday, specialization, crn);
+                    idnutritionist, nutritionistEmail, nutritionistFullname, nutritionistBirthday, specialization, crn, nutritionistAdress);
 
             clients.add(new NutritionistClient(idclient,patient, nutritionist));
         }
@@ -186,6 +189,7 @@ public class Util {
             String nutritionistEmail = nutritionistObject.getString("email");
             String nutritionistFullname = nutritionistObject.getString("fullname");
             String nutritionistBirthday = nutritionistObject.getString("birthday");
+            String nutritionistAdress = nutritionistObject.getString("address");
             String specialization = nutritionistObject.getString("specialization");
             String crn = nutritionistObject.getString("crn");
 
@@ -195,6 +199,7 @@ public class Util {
             String patientEmail = patientObject.getString("email");
             String patientFullname = patientObject.getString("fullname");
             String patientBirthday = patientObject.getString("birthday");
+
             Double weight = patientObject.getDouble("weight");
             Double height = patientObject.getDouble("height");
             String description = patientObject.getString("description");
@@ -204,7 +209,7 @@ public class Util {
                     idpatient, patientEmail, patientFullname, patientBirthday, weight, height, description);
 
             Nutritionist nutritionist = new Nutritionist(
-                    idnutritionist, nutritionistEmail, nutritionistFullname, nutritionistBirthday, specialization, crn);
+                    idnutritionist, nutritionistEmail, nutritionistFullname, nutritionistBirthday, specialization, crn, nutritionistAdress);
 
             NutritionalPlan plan = new NutritionalPlan(idplan,weekDay, breakfast,lunch,dinner, nutritionist, patient );
 
@@ -232,6 +237,7 @@ public class Util {
         String nutritionistEmail = nutritionistObject.getString("email");
         String nutritionistFullname = nutritionistObject.getString("fullname");
         String nutritionistBirthday = nutritionistObject.getString("birthday");
+        String nutritionistAdress = nutritionistObject.getString("address");
         String specialization = nutritionistObject.getString("specialization");
         String crn = nutritionistObject.getString("crn");
 
@@ -250,7 +256,7 @@ public class Util {
                 idpatient, patientEmail, patientFullname, patientBirthday, weight, height, description);
 
         Nutritionist nutritionist = new Nutritionist(
-                idnutritionist, nutritionistEmail, nutritionistFullname, nutritionistBirthday, specialization, crn);
+                idnutritionist, nutritionistEmail, nutritionistFullname, nutritionistBirthday, specialization, crn, nutritionistAdress);
 
         NutritionalPlan plan = new NutritionalPlan(idplan,weekDay, breakfast,lunch,dinner, nutritionist, patient );
 
@@ -258,7 +264,7 @@ public class Util {
     }
 
 
-    public static JSONObject filPlan
+    public static JSONObject fillPlan
             (String weekday,String breakfast, String lunch, String dinner, Long idnutritionist, Long idpatient) throws JSONException {
         JSONObject planObject = new JSONObject();
 
@@ -273,4 +279,50 @@ public class Util {
     }
 
 
+    public static List<Articles> fillArticles(JSONArray articlesArray) throws JSONException {
+        try{
+            List<Articles> articles = new ArrayList<>();
+
+
+            for (int i = 0; i < articlesArray.length(); i++) {
+                JSONObject articleObject = articlesArray.getJSONObject(i);
+                Long idarticle = articleObject.getLong("idarticle");
+                String title = articleObject.getString("title");
+                String text = articleObject.getString("text");
+
+                JSONObject nutritionistObject = articleObject.getJSONObject("nutritionist");
+
+                Long idnutritionist = nutritionistObject.getLong("iduser");
+                String nutritionistEmail = nutritionistObject.getString("email");
+                String nutritionistFullname = nutritionistObject.getString("fullname");
+                String nutritionistBirthday = nutritionistObject.getString("birthday");
+                String nutritionistAdress = nutritionistObject.getString("address");
+                String specialization = nutritionistObject.getString("specialization");
+                String crn = nutritionistObject.getString("crn");
+
+
+                Nutritionist nutritionist = new Nutritionist(
+                        idnutritionist, nutritionistEmail, nutritionistFullname, nutritionistBirthday, specialization, crn, nutritionistAdress);
+
+                Articles article = new Articles(idarticle, title, text, nutritionist);
+
+                articles.add(article);
+            }
+
+            return articles;
+        }catch(Exception e){
+            throw e;
+        }
+    }
+
+
+    public JSONObject articleObj (String title, String text, Long idnutritionist) throws Exception{
+        JSONObject articleObj = new JSONObject();
+
+        articleObj.put("title", title);
+        articleObj.put("text", text);
+        articleObj.put("nutritionist", idnutritionist);
+
+        return articleObj;
+    }
 }

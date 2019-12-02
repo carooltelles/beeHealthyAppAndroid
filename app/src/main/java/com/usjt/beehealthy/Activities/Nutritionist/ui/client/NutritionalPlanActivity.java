@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -48,18 +49,16 @@ public class NutritionalPlanActivity extends AppCompatActivity {
             planRecycler = findViewById(R.id.plan_list_recycler);
 
 
-            FloatingActionButton fab = findViewById(R.id.plan_fab_save);
+            FloatingActionButton fab = findViewById(R.id.plan_add);
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     try {
-                       // updatePlan(plan.getIdplan());
+                        Intent intent = new Intent(view.getContext(), NutritionalPlanAddActivity.class);
+                        intent.putExtra("client", client);
+                        startActivity(intent);
                     } catch (Exception e) {
-                        try {
-                            throw e;
-                        } catch (JSONException ex) {
-                            ex.printStackTrace();
-                        }
+                        throw e;
                     }
 
                 }

@@ -4,25 +4,40 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/bee_healthy_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme">
+        <activity android:name=".Activities.Nutritionist.ui.articles.ArticleDetails"
+            android:label="@string/title_activity_article"></activity>
+        <activity
+            android:name=".Activities.Nutritionist.ui.articles.ArticleAddActivity"
+            android:label="@string/title_activity_article_add"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activities.Nutritionist.ui.client.NutritionalPlanAddActivity"
+            android:label="@string/title_activity_nutritionist_plan_add" />
         <activity
             android:name=".Activities.Nutritionist.ui.client.NutritionistPlanDetail"
-            android:label="@string/title_activity_nutritionist_plan_detail"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
-        <activity android:name=".Activities.Nutritionist.ui.client.NutritionalPlanActivity" />
+            android:label="@string/title_activity_nutritionist_plan_detail" />
+        <activity
+            android:name=".Activities.Nutritionist.ui.client.NutritionalPlanActivity"
+            android:background="@color/orange"
+            android:label="@string/title_activity_plan_list" />
         <activity
             android:name=".Activities.Nutritionist.ui.client.ClientDetails"
             android:label="@string/title_activity_client_details"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-        <activity android:name=".Activities.Register.RegisterActivity" />
+        <activity
+            android:name=".Activities.Register.RegisterActivity"
+            android:label="@string/title_activity_register" />
         <activity
             android:name=".Activities.Nutritionist.NutritionistMenu"
             android:label="@string/title_activity_nutritionist_menu" />
-        <activity android:name=".Activities.MainActivity">
+        <activity
+            android:name=".Activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

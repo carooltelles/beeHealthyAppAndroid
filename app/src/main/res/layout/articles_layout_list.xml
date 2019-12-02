@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="112dp"
+    android:layout_marginTop="10px"
+    android:background="@drawable/layout_shadow_white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_consult"
+    android:foreground="?attr/selectableItemBackground">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="131dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp">
+
+
+        <TextView
+            android:id="@+id/article_subject"
+            android:layout_width="158dp"
+            android:layout_height="52dp"
+            android:text="TextView"
+            android:textSize="35px"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.92"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.708" />
+
+        <TextView
+            android:id="@+id/article_nutritionist_fullname"
+            android:layout_width="183dp"
+            android:layout_height="40dp"
+            android:text="TextView"
+            android:textSize="35px"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.909"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.175" />
+
+        <TextView
+            android:id="@+id/article_dr_name"
+            android:layout_width="26dp"
+            android:layout_height="40dp"
+            android:text="Dr:"
+            android:textAlignment="viewEnd"
+            android:textSize="35px"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.389"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.172" />
+
+        <TextView
+            android:id="@+id/article_subject_name"
+            android:layout_width="52dp"
+            android:layout_height="35dp"
+            android:text="Título: "
+            android:textAlignment="viewEnd"
+            android:textSize="35px"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.422"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.583" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
+

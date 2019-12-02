@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="112dp"
+    android:layout_marginTop="10px"
+    android:background="@drawable/layout_shadow_white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_consult"
     android:foreground="?attr/selectableItemBackground">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="131dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="1dp">

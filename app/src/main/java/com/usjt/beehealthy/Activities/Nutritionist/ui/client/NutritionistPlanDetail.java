@@ -42,8 +42,6 @@ public class NutritionistPlanDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nutritionist_plan_detail);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         bundle = getIntent().getExtras();
         plan = (NutritionalPlan) bundle.getSerializable("plan");
         initComponents();
@@ -86,7 +84,7 @@ public class NutritionistPlanDetail extends AppCompatActivity {
 
     public void updatePlan(Long idplan) throws JSONException {
         try {
-            JSONObject planObject = Util.filPlan
+            JSONObject planObject = Util.fillPlan
                     (weekday.getText().toString(), breakfast.getText().toString(),
                             lunch.getText().toString(), dinner.getText().toString(),
                             plan.getNutritionist().iduser, plan.getPatient().getIduser());

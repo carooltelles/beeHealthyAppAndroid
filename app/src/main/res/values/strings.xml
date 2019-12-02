@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">beeHealthy</string>
+    <string name="app_name">Bee Healthy</string>
     <string name="NomeCompleto">Nome Completo</string>
     <string name="Email">Email</string>
     <string name="Senha">Senha</string>
@@ -30,20 +30,23 @@
     <string name="LogOut">Sair</string>
     <string name="consulta">Agendar Consulta</string>
     <string name="connect_error">Erro na conexão</string>
-    <string name="web_service_url">https://40cc3d69.ngrok.io</string>
+    <string name="web_service_url">https://88986971.ngrok.io</string>
     <string name="no_data_available">Busque por um nutricionista</string>
     <string name="nEncontrado">\"Não Encontrado\"</string>
     <string name="Data">Data:</string>
     <string name="Local">Local:</string>
     <string name="ConsultaMarcada">Consultas Marcadas</string>
     <string name="CRN">CRN</string>
-    <string name="title_activity_nutritionist_menu">NutritionistMenu</string>
+    <string name="title_activity_nutritionist_menu">Menu do Nutricionista</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="title_activity_register">Cadastro</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_client_details">Detalhes do Cliente</string>
-    <string name="title_activity_nutritionist_plan_detail">NutritionistPlanDetail</string>
+    <string name="title_activity_plan_list">Plano Semanal</string>
+    <string name="title_activity_nutritionist_plan_detail">Plano do dia</string>
+    <string name="title_activity_nutritionist_plan_add">Adicionar Plano</string>
+    <string name="title_activity_article_add">Adicionar Artigo</string>
+    <string name="title_activity_article">Artigo</string>
 </resources>

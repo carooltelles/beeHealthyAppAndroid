@@ -2,12 +2,14 @@ package com.usjt.beehealthy.Activities.Nutritionist.ui.client;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.usjt.beehealthy.Model.NutritionalPlan;
@@ -49,10 +51,13 @@ public class NutritionalPlanAdapter extends RecyclerView.Adapter<NutritionalPlan
 
     public class PlanViewHolder extends RecyclerView.ViewHolder{
         TextView weekday;
+        CardView cardPlan;
 
         public PlanViewHolder(@NonNull View itemView, final Context context){
             super(itemView);
             weekday = itemView.findViewById(R.id.planWeekday);
+            cardPlan = itemView.findViewById(R.id.plan_layout_list);
+
 
             itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(context, NutritionistPlanDetail.class);

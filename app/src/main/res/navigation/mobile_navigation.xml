@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_articles">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.usjt.beehealthy.Activities.Nutritionist.ui.home.HomeFragment"
+        android:id="@+id/navigation_articles"
+        android:name="com.usjt.beehealthy.Activities.Nutritionist.ui.articles.ArticleFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_article" />
 
     <fragment
         android:id="@+id/navigation_consults"
