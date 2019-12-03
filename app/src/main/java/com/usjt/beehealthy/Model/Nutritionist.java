@@ -21,6 +21,15 @@ public class Nutritionist extends User implements Serializable{
         this.specialization = specialization;
         this.crn = crn;
         this.address = address;
+
+
+
+    }
+
+    public Nutritionist(String fullname,String email, String password) {
+        this.email = email;
+        this.fullname = fullname;
+        this.password = password;
     }
 
     public Nutritionist(Long iduser , String email, String fullname, String birthday, String specialization, String crn, String address) {

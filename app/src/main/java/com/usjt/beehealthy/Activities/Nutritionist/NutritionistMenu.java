@@ -7,6 +7,7 @@ import com.usjt.beehealthy.Activities.Nutritionist.ui.consult.ConsultFragment;
 import com.usjt.beehealthy.Activities.Nutritionist.ui.articles.ArticleFragment;
 import com.usjt.beehealthy.Activities.Nutritionist.ui.client.ClientsFragment;
 import com.usjt.beehealthy.Activities.Nutritionist.ui.profile.ProfileFragment;
+import com.usjt.beehealthy.Model.Nutritionist;
 import com.usjt.beehealthy.R;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,13 @@ public class NutritionistMenu extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
+        Bundle bundle = new Bundle();
+
+        bundle = getIntent().getExtras();
+
+        Nutritionist nutritionist = (Nutritionist) bundle.getSerializable("Nutritionist");
+
+        System.out.println(nutritionist.getPassword());
         fragmentManager.beginTransaction().replace(R.id.nutritionist_container,
                 new ArticleFragment()).commit();
 

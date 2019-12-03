@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "184128835940-28ehdvqqmb63li88fsq7dkvqa2cilt16.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.usjt.beehealthy",
+            "certificate_hash": "0f0788c4aa3fd9c7f9949782a5154a885d01e97e"
+          }
+        },
+        {
           "client_id": "184128835940-nn2b2dvvu0nbopioo3bh5e367ahpo336.apps.googleusercontent.com",
           "client_type": 3
         }

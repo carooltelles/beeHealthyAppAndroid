@@ -7,17 +7,9 @@
     android:orientation="vertical">
 
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="141dp"
-        tools:layout_editor_absoluteY="50dp"
-        tools:srcCompat="@tools:sample/avatars[4]" />
-
     <LinearLayout
         android:layout_width="278dp"
-        android:layout_height="400dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -114,6 +106,21 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nutritionist_specialization"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:hint="Endereço"
+            tools:layout_editor_absoluteX="78dp"
+            tools:layout_editor_absoluteY="383dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nutritionist_address"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="text" />
