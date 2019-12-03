@@ -33,14 +33,8 @@ public class Menu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
         bundle = getIntent().getExtras();
-        Patient patient = (Patient) bundle.getSerializable("Paciente");
+        user = (Paciente) bundle.getSerializable("Paciente");
 
-        user.setEmail(patient.getEmail());
-        user.setDescription(patient.getDescription());
-        user.setHeight(patient.getHeight());
-        user.setWeight(patient.getWeight());
-        user.setNascimento(patient.getBirthday());
-        user.setNome(patient.getFullname());
 
         alert(user.getSenha());
         docPreferences(user);

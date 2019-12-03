@@ -17,7 +17,9 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.usjt.beehealthy.Activities.MainActivity;
 import com.usjt.beehealthy.Activities.Nutritionist.NutritionistMenu;
+import com.usjt.beehealthy.Menu;
 import com.usjt.beehealthy.Model.Nutritionist;
+import com.usjt.beehealthy.Model.Paciente;
 import com.usjt.beehealthy.R;
 import com.usjt.beehealthy.Utilities.Util;
 
@@ -77,7 +79,14 @@ public class RegisterActivity extends AppCompatActivity {
                             loginNutritionist(nutritionist);
 
                         }else if (type == "patient"){
+                            int idUser = response.getInt("iduser");
+                            String nascimento = response.getString("birthday");
 
+                            Paciente paciente = new Paciente(fullname.getText().toString(), email.getText().toString(),
+                                    password.getText().toString(),nascimento );
+
+                            paciente.setId(idUser);
+                            entrar(paciente);
                         }
                     } catch (JSONException e) {
                         Toast.makeText(this, "Erro na resposta", Toast.LENGTH_SHORT).show();
@@ -99,6 +108,13 @@ public class RegisterActivity extends AppCompatActivity {
     private void alert(String s) {
         Toast.makeText(this, s, Toast.LENGTH_LONG).show();
     }
+
+    public void entrar(Paciente paciente) {
+        Intent intent = new Intent(this, Menu.class);
+        intent.putExtra("Paciente", paciente);
+        startActivity(intent);
+    }
+
 
 
     public void loginNutritionist(Nutritionist nutritionist){

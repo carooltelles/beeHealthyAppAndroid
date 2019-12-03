@@ -123,8 +123,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     loginNutritionist(nutritionist);
 
                 }else if (type == "patient"){
-                    Patient paciente = (Patient) Util.gettingLoginAttributes(type, response);
-                    loginPatient(paciente, false);
+                    Paciente p = new Paciente();
+                    p.setEmail(email.getText().toString());
+                    p.setSenha(password.getText().toString());
+                    p.setTipo("patient");
+                    enviaApi(p);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -149,6 +152,47 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
                     excecao.printStackTrace();
                 } );
+        requestQueue.add(req);
+
+
+    }
+
+
+    public void entrar(Paciente paciente) {
+        Intent intent = new Intent(this, Menu.class);
+        intent.putExtra("Paciente", paciente);
+        startActivity(intent);
+    }
+
+
+
+    public void enviaApi(Paciente paciente) {
+        String url = getString(
+                R.string.web_service_url
+        ) + "/user/login/";
+        JsonObjectRequest req = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                paciente.json(),
+                (resultado) -> {
+                    try {
+                        int idUser = resultado.getInt("iduser");
+                        paciente.setId(idUser);
+                        entrar(paciente);
+                    } catch (JSONException e) {
+                        Toast.makeText(this, "Erro na resposta", Toast.LENGTH_SHORT).show();
+                    }
+
+                },
+                (excecao) -> {
+                    Toast.makeText(
+                            this,
+                            getString(R.string.connect_error),
+                            Toast.LENGTH_SHORT
+                    ).show();
+                    excecao.printStackTrace();
+                }
+        );
         requestQueue.add(req);
     }
 
