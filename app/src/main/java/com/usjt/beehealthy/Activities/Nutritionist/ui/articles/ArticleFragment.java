@@ -1,5 +1,6 @@
 package com.usjt.beehealthy.Activities.Nutritionist.ui.articles;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -38,6 +39,7 @@ public class ArticleFragment extends Fragment {
     public List<Articles> articles;
     private RequestQueue requestQueue;
     public RecyclerView articleRecycler;
+    public static ArticleAdapter adapter;
 
 
 
@@ -77,6 +79,17 @@ public class ArticleFragment extends Fragment {
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        getArticles();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getArticles();
+    }
 
 
     public void getArticles() {
@@ -106,10 +119,11 @@ public class ArticleFragment extends Fragment {
     }
 
 
+
     public void setList(){
         LinearLayoutManager linear = new LinearLayoutManager(getContext());
         articleRecycler.setLayoutManager(linear);
-        ArticleAdapter adapter = new ArticleAdapter(articles);
+        adapter = new ArticleAdapter(articles);
         adapter.notifyDataSetChanged();
         articleRecycler.setAdapter(adapter);
     }

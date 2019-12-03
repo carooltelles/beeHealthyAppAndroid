@@ -16,9 +16,14 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.usjt.beehealthy.Activities.Nutritionist.NutritionistMenu;
 import com.usjt.beehealthy.Activities.Register.RegisterActivity;
+import com.usjt.beehealthy.Menu;
 import com.usjt.beehealthy.Model.Nutritionist;
+import com.usjt.beehealthy.Model.Paciente;
+import com.usjt.beehealthy.Model.Patient;
 import com.usjt.beehealthy.R;
 
 import com.google.android.gms.auth.api.Auth;
@@ -118,7 +123,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     loginNutritionist(nutritionist);
 
                 }else if (type == "patient"){
-
+                    Paciente p = new Paciente();
+                    p.setEmail(email.getText().toString());
+                    p.setSenha(password.getText().toString());
+                    p.setTipo("patient");
+                    enviaApi(p);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -144,18 +153,61 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     excecao.printStackTrace();
                 } );
         requestQueue.add(req);
+
+
     }
 
-//    private void entrar(User user) {
-//        Intent intent = new Intent(this, Menu.class);
-//        intent.putExtra("User",user);
-//        startActivity(intent);
-//    }
+
+    public void entrar(Paciente paciente) {
+        Intent intent = new Intent(this, Menu.class);
+        intent.putExtra("Paciente", paciente);
+        startActivity(intent);
+    }
+
+
+
+    public void enviaApi(Paciente paciente) {
+        String url = getString(
+                R.string.web_service_url
+        ) + "/user/login/";
+        JsonObjectRequest req = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                paciente.json(),
+                (resultado) -> {
+                    try {
+                        int idUser = resultado.getInt("iduser");
+                        paciente.setId(idUser);
+                        entrar(paciente);
+                    } catch (JSONException e) {
+                        Toast.makeText(this, "Erro na resposta", Toast.LENGTH_SHORT).show();
+                    }
+
+                },
+                (excecao) -> {
+                    Toast.makeText(
+                            this,
+                            getString(R.string.connect_error),
+                            Toast.LENGTH_SHORT
+                    ).show();
+                    excecao.printStackTrace();
+                }
+        );
+        requestQueue.add(req);
+    }
 
     public void loginNutritionist(Nutritionist nutritionist){
         Intent intent = new Intent(this, NutritionistMenu.class);
         intent.putExtra("Nutritionist", nutritionist);
         startActivity(intent);
+    }
+
+    private void loginPatient(Patient user, boolean google) {
+        Intent intent = new Intent(this, Menu.class);
+        intent.putExtra("Paciente", user);
+        intent.putExtra("Google",google);
+        startActivity(intent);
+        mFirebaseAuth.signOut();
     }
 
     @Override
@@ -186,19 +238,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         }
     }
 
-//    private void firebaseLogin(GoogleSignInAccount account) {
-//        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-//        mFirebaseAuth.signInWithCredential(credential)
-//                .addOnCompleteListener(task -> {
-//                    if (task.isSuccessful()) {
+    private void firebaseLogin(GoogleSignInAccount account) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+        mFirebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
 //                        Paciente paciente = new Paciente(account.getDisplayName(),
 //                                account.getEmail(),account.getId(),"Pacient",null);
-//                        entrar(paciente);
-//                    } else {
-//                        alert("Falha na autenticação");
-//                    }
-//                });
-//    }
+                       // entrar(paciente);
+                    } else {
+                        alert("Falha na autenticação");
+                    }
+                });
+    }
 
 
     public void validateLoginFields(EditText email, EditText password,
