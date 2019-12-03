@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConsultasPaciente">
+
+    <ImageView
+        android:id="@+id/fotoP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textNomeNutriConsulta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/Nome"
+        android:textSize="@dimen/tamLetra"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textEspConsulta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Esp"
+        android:textSize="@dimen/tamLetra"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textEnderecoConsulta"
+        android:text="@string/End"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/tamLetra"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textDataConsulta"
+        android:text="@string/DataConsulta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/tamLetra"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/CancelarConsulta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cancelarConsulta"/>
+
+</LinearLayout>
