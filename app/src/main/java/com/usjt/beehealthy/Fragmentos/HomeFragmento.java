@@ -1,4 +1,4 @@
-package br.com.gabriel.firebase.Fragmentos;
+package com.usjt.beehealthy.Fragmentos;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,15 +15,14 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.usjt.beehealthy.Model.Paciente;
+import com.usjt.beehealthy.Model.PlanoNutricionista;
+import com.usjt.beehealthy.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Objects;
-
-import br.com.gabriel.firebase.R;
-import br.com.gabriel.firebase.model.Paciente;
-import br.com.gabriel.firebase.model.PlanoNutricionista;
 
 public class HomeFragmento extends Fragment {
 

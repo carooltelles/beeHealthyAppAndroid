@@ -1,4 +1,4 @@
-package br.com.gabriel.firebase.Adapter;
+package com.usjt.beehealthy.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,14 +11,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.usjt.beehealthy.ConsultasPaciente;
+import com.usjt.beehealthy.Model.ConsultaMarcada;
+import com.usjt.beehealthy.R;
+
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
-
-import br.com.gabriel.firebase.ConsultasPaciente;
-import br.com.gabriel.firebase.PerfilNutricionista;
-import br.com.gabriel.firebase.R;
-import br.com.gabriel.firebase.model.ConsultaMarcada;
 
 public class ListaConsultasAdapter extends RecyclerView.Adapter<ListaConsultasAdapter.ViewHolderCliente> {
 

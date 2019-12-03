@@ -22,6 +22,7 @@ public class Util {
 
     public static Object gettingLoginAttributes(String type, JSONObject response) throws JSONException {
         if (type.equals("nutritionist")) {
+
             Nutritionist nutritionist = new Nutritionist();
             nutritionist.setFullname(response.getString("fullname"));
             nutritionist.setIduser(response.getLong("iduser"));

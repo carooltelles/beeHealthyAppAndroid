@@ -14,6 +14,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.usjt.beehealthy.Adapter.ConsutaAdapter;
 import com.usjt.beehealthy.Model.Consulta;
 import com.usjt.beehealthy.Model.Horario;
 import com.usjt.beehealthy.Model.Nutricionista;
@@ -28,7 +29,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
-import br.com.gabriel.firebase.Adapter.ConsutaAdapter;
 
 public class Consultas extends AppCompatActivity {
 

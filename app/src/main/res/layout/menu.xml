@@ -5,14 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Activities.MainActivity">
 
     <fragment
         android:id="@+id/container_fragmento"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/botoes_navegacao"
-        android:name="br.com.gabriel.firebase.Fragmentos.HomeFragmento"/>
+        android:name="com.usjt.beehealthy.Fragmentos.HomeFragmento"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/botoes_navegacao"

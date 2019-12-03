@@ -1,4 +1,4 @@
-package br.com.gabriel.firebase.Fragmentos;
+package com.usjt.beehealthy.Fragmentos;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,24 +16,18 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.usjt.beehealthy.Adapter.ListaConsultasAdapter;
+import com.usjt.beehealthy.Model.ConsultaMarcada;
+import com.usjt.beehealthy.Model.Nutricionista;
+import com.usjt.beehealthy.Model.Usuario;
+import com.usjt.beehealthy.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-import br.com.gabriel.firebase.Adapter.ListaConsultasAdapter;
-import br.com.gabriel.firebase.R;
-import br.com.gabriel.firebase.model.ConsultaMarcada;
-import br.com.gabriel.firebase.model.Nutricionista;
-import br.com.gabriel.firebase.model.Usuario;
 
 public class FavFragmento extends Fragment {
 

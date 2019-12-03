@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.PopUps.PopUpDeleteActivity"></activity>
         <activity
             android:name=".Activities.Nutritionist.ui.articles.ArticleDetails"
             android:label="@string/title_activity_article" />
@@ -46,6 +45,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".Configuracoes"></activity>
+        <activity android:name=".AlterarPaciente" />
+        <activity android:name=".ConsultasPaciente" />
+        <activity android:name=".ConsultaM" />
+        <activity android:name=".RegistraNutri" />
+        <activity android:name=".MarcarConsulta" />
+        <activity android:name=".Consultas" />
+        <activity android:name=".Register" />
+        <activity android:name=".PerfilNutricionista" />
+        <activity android:name=".Menu" />
     </application>
 
 </manifest>

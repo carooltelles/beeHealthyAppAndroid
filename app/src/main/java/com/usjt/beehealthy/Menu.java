@@ -14,14 +14,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.usjt.beehealthy.Configuracoes;
+import com.usjt.beehealthy.Fragmentos.FavFragmento;
+import com.usjt.beehealthy.Fragmentos.HomeFragmento;
+import com.usjt.beehealthy.Fragmentos.ProcFragmento;
 import com.usjt.beehealthy.Model.Paciente;
-import com.usjt.beehealthy.R;
-
-import br.com.gabriel.firebase.Fragmentos.FavFragmento;
-import br.com.gabriel.firebase.Fragmentos.HomeFragmento;
-import br.com.gabriel.firebase.Fragmentos.ProcFragmento;
-
+import com.usjt.beehealthy.Model.Patient;
 
 
 public class Menu extends AppCompatActivity {
@@ -36,7 +33,15 @@ public class Menu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
         bundle = getIntent().getExtras();
-        user =(Paciente) bundle.getSerializable("Paciente");
+        Patient patient = (Patient) bundle.getSerializable("Paciente");
+
+        user.setEmail(patient.getEmail());
+        user.setDescription(patient.getDescription());
+        user.setHeight(patient.getHeight());
+        user.setWeight(patient.getWeight());
+        user.setNascimento(patient.getBirthday());
+        user.setNome(patient.getFullname());
+
         alert(user.getSenha());
         docPreferences(user);
         iniciarComponentes();
