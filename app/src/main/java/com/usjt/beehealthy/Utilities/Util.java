@@ -316,7 +316,7 @@ public class Util {
     }
 
 
-    public JSONObject articleObj (String title, String text, Long idnutritionist) throws Exception{
+    public static JSONObject articleObj (String title, String text, Long idnutritionist) throws Exception{
         JSONObject articleObj = new JSONObject();
 
         articleObj.put("title", title);
@@ -324,5 +324,25 @@ public class Util {
         articleObj.put("nutritionist", idnutritionist);
 
         return articleObj;
+    }
+
+    public static Articles getArticle(JSONObject articleObject) throws Exception{
+        Articles article = new Articles();
+        article.setIdarticle(articleObject.getLong("idarticle"));
+        article.setTitle(articleObject.getString("title"));
+        article.setText(articleObject.getString("text"));
+
+        JSONObject nutritionistObject = articleObject.getJSONObject("nutritionist");
+        Nutritionist nutritionist = new Nutritionist();
+
+        nutritionist.setIduser(nutritionistObject.getLong("iduser"));
+        nutritionist.setFullname(nutritionistObject.getString("fullname"));
+        nutritionist.setEmail(nutritionistObject.getString("email"));
+        nutritionist.setSpecialization(nutritionistObject.getString("specialization"));
+        nutritionist.setCrn(nutritionistObject.getString("crn"));
+
+        article.setNutritionist(nutritionist);
+
+        return article;
     }
 }

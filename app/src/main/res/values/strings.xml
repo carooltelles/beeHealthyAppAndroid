@@ -30,7 +30,7 @@
     <string name="LogOut">Sair</string>
     <string name="consulta">Agendar Consulta</string>
     <string name="connect_error">Erro na conexão</string>
-    <string name="web_service_url">https://88986971.ngrok.io</string>
+    <string name="web_service_url">https://f0c09e5e.ngrok.io</string>
     <string name="no_data_available">Busque por um nutricionista</string>
     <string name="nEncontrado">\"Não Encontrado\"</string>
     <string name="Data">Data:</string>
@@ -49,4 +49,23 @@
     <string name="title_activity_nutritionist_plan_add">Adicionar Plano</string>
     <string name="title_activity_article_add">Adicionar Artigo</string>
     <string name="title_activity_article">Artigo</string>
+
+    <string name="crn">crn</string>
+    <string name="Marcar">Marcar Consulta</string>
+    <string name="local">Local</string>
+    <string name="cancelarConsulta">Cancelar Consulta</string>
+    <string name="DataConsulta">Data</string>
+    <string name="ConsultCancelada">Consulta Cancelada</string>
+    <string name="Nasc">Nascimento:</string>
+    <string name="AlterarDados">Atualizar Dados</string>
+    <string name="SenhaAnt">Senha Antiga</string>
+    <string name="SenhaNova">Senha Nova</string>
+    <string name="SenhaNovaRep">Repita a senha nova</string>
+    <string name="Cafe">Café da Manhã</string>
+    <string name="Alm">Almoço</string>
+    <string name="Lanche">Lanche</string>
+    <string name="Plano">Suas Dietas</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="config">Configurações</string>
 </resources>

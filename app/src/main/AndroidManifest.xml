@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.Nutritionist.ui.articles.ArticleDetails"
-            android:label="@string/title_activity_article"></activity>
+        <activity android:name=".Activities.PopUps.PopUpDeleteActivity"></activity>
+        <activity
+            android:name=".Activities.Nutritionist.ui.articles.ArticleDetails"
+            android:label="@string/title_activity_article" />
         <activity
             android:name=".Activities.Nutritionist.ui.articles.ArticleAddActivity"
             android:label="@string/title_activity_article_add"
