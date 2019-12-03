@@ -6,13 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.usjt.beehealthy.Model.Nutricionista;
-
-import br.com.gabriel.firebase.model.Nutricionista;
 
 public class PerfilNutricionista extends AppCompatActivity {
     private ImageView foto;

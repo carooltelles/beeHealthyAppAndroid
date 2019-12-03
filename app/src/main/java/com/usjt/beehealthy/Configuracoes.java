@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.usjt.beehealthy.Model.Paciente;
 
-import br.com.gabriel.firebase.model.Paciente;
 
 public class Configuracoes extends AppCompatActivity {
 

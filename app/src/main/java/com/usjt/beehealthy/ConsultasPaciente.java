@@ -3,7 +3,6 @@ package com.usjt.beehealthy;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,14 +13,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.usjt.beehealthy.Model.ConsultaMarcada;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.Objects;
-
-import br.com.gabriel.firebase.model.ConsultaMarcada;
-import br.com.gabriel.firebase.model.Nutricionista;
 
 public class ConsultasPaciente extends AppCompatActivity {
 

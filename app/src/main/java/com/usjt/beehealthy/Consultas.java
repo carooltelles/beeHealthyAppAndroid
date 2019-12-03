@@ -29,9 +29,6 @@ import java.util.List;
 import java.util.Objects;
 
 import br.com.gabriel.firebase.Adapter.ConsutaAdapter;
-import br.com.gabriel.firebase.model.Consulta;
-import br.com.gabriel.firebase.model.Horario;
-import br.com.gabriel.firebase.model.Nutricionista;
 
 public class Consultas extends AppCompatActivity {
 

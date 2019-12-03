@@ -7,13 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.usjt.beehealthy.Model.Consulta;
 import com.usjt.beehealthy.Model.ConsultaMarcada;
@@ -21,11 +19,6 @@ import com.usjt.beehealthy.Model.Horario;
 
 import java.text.DateFormat;
 import java.util.Date;
-
-import br.com.gabriel.firebase.model.Consulta;
-import br.com.gabriel.firebase.model.ConsultaMarcada;
-import br.com.gabriel.firebase.model.Horario;
-import br.com.gabriel.firebase.model.Usuario;
 
 public class MarcarConsulta extends AppCompatActivity {
 

@@ -14,9 +14,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.usjt.beehealthy.Model.Nutricionista;
-import com.usjt.beehealthy.R;
-
-import br.com.gabriel.firebase.model.Nutricionista;
 
 public class RegistraNutri extends AppCompatActivity {
 
