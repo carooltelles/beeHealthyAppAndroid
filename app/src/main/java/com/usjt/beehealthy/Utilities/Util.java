@@ -26,7 +26,7 @@ public class Util {
             Nutritionist nutritionist = new Nutritionist();
             nutritionist.setFullname(response.getString("fullname"));
             nutritionist.setIduser(response.getLong("iduser"));
-
+            nutritionist.setAddress(response.getString("address"));
             nutritionist.setEmail(response.getString("email"));
             nutritionist.setPassword(response.getString("password"));
             nutritionist.setBirthday(response.getString("birthday"));
@@ -78,6 +78,15 @@ public class Util {
         return user;
     }
 
+    public static JSONObject userObj (String email, String password, String type, String fullname) throws JSONException{
+        JSONObject user = new JSONObject();
+        user.put("email", email);
+        user.put("password", password);
+        user.put("type", type);
+        user.put("fullname", fullname);
+        return user;
+    }
+
     public static List<Consult> populateConsultList(JSONArray consultsArray) throws JSONException {
         List<Consult> consults = new ArrayList<>();
         JSONObject consultObject;
@@ -126,6 +135,7 @@ public class Util {
         nutritionistObject.put("type", "nutritionist");
         nutritionistObject.put("password", nutritionist.getPassword());
         nutritionistObject.put("birthday", nutritionist.getBirthday());
+        nutritionistObject.put("address", nutritionist.getAddress());
         nutritionistObject.put("fullname", nutritionist.getFullname());
         nutritionistObject.put("crn", nutritionist.getCrn());
         nutritionistObject.put("specialization", nutritionist.getSpecialization());

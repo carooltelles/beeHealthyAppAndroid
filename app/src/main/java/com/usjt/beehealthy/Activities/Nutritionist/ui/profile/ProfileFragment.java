@@ -39,7 +39,7 @@ import java.util.List;
 
 public class ProfileFragment extends Fragment {
 
-    private TextInputEditText fullname, email, password, birthday, crn, specialization;
+    private TextInputEditText fullname, email, password, birthday, crn, specialization,address;
     private RequestQueue requestQueue;
     private Button saveButton;
     private Long idnutritionist;
@@ -71,6 +71,11 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        try {
+            getProfile();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         putInfoScreen();
     }
 
@@ -81,6 +86,7 @@ public class ProfileFragment extends Fragment {
         password.setText(nutritionist.getPassword());
         birthday.setText(nutritionist.getBirthday());
         crn.setText(nutritionist.getCrn());
+        address.setText(nutritionist.getAddress());
         specialization.setText(nutritionist.getSpecialization());
     }
 
@@ -91,15 +97,41 @@ public class ProfileFragment extends Fragment {
         password = view.findViewById(R.id.nutritionist_password);
         crn = view.findViewById(R.id.nutritionist_crn);
         specialization = view.findViewById(R.id.nutritionist_specialization);
+        address = view.findViewById(R.id.nutritionist_address);
         saveButton = view.findViewById(R.id.nutritionist_save);
     }
 
 
+    public void getProfile() throws JSONException {
+
+        JSONObject nutritionistObj = Util.nutritionistObj(nutritionist);
+        System.out.println(nutritionistObj);
+        requestQueue = Volley.newRequestQueue(getActivity());
+        String url = getString(R.string.web_service_url) + "/nutritionist/" + idnutritionist;
+        JsonObjectRequest req = new JsonObjectRequest(
+                Method.GET, url, null,
+                (response) -> {
+                    try {
+                        nutritionist = (Nutritionist) Util.gettingLoginAttributes(type,response);
+                        putInfoScreen();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                (excecao) -> {
+                    NetworkResponse response = excecao.networkResponse;
+                    excecao.printStackTrace();
+                });
+        requestQueue.add(req);
+    }
+
+
     public void saveChanges() throws JSONException {
+        System.out.println("DENTRO DO FRAGMENTO" + password.getText().toString());
         nutritionist = new Nutritionist(
                 idnutritionist, email.getText().toString(), fullname.getText().toString(),
                 password.getText().toString(),
-                birthday.getText().toString(), specialization.getText().toString(), crn.getText().toString());
+                birthday.getText().toString(), specialization.getText().toString(), crn.getText().toString(),address.getText().toString());
 
         JSONObject nutritionistObj = Util.nutritionistObj(nutritionist);
         System.out.println(nutritionistObj);
@@ -115,9 +147,7 @@ public class ProfileFragment extends Fragment {
                         e.printStackTrace();
                     }
                 },
-                (excecao) ->
-
-                {
+                (excecao) -> {
                     NetworkResponse response = excecao.networkResponse;
                     excecao.printStackTrace();
                 });

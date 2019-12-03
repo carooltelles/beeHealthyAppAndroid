@@ -34,7 +34,9 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
+import com.usjt.beehealthy.Register;
 import com.usjt.beehealthy.Utilities.Util;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -72,9 +74,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         btnSingIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                singGoogle();
+                if (patientRButton.isChecked() || nutritionistRButton.isChecked())
+                    singGoogle();
+                else
+                    alert("Escolha um perfil");
             }
         });
+
     }
 
     private void conectaGoogleApi() {
@@ -102,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     public void register(View view) {
-        Intent intent = new Intent(this, RegisterActivity.class);
+        Intent intent = new Intent(this, Register.class);
         startActivity(intent);
     }
 
@@ -122,12 +128,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     Nutritionist nutritionist = (Nutritionist) Util.gettingLoginAttributes(type, response);
                     loginNutritionist(nutritionist);
 
-                }else if (type == "patient"){
+                } else if (type == "patient") {
                     Paciente p = new Paciente();
                     p.setEmail(email.getText().toString());
                     p.setSenha(password.getText().toString());
                     p.setTipo("patient");
-                    enviaApi(p);
+                    enviaApi(p, false);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -151,25 +157,65 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     }
 
                     excecao.printStackTrace();
-                } );
+                });
         requestQueue.add(req);
 
 
     }
 
 
-    public void entrar(Paciente paciente) {
+    private void entrar(Paciente user, boolean google) {
         Intent intent = new Intent(this, Menu.class);
-        intent.putExtra("Paciente", paciente);
+        intent.putExtra("Paciente", user);
+        intent.putExtra("Google", google);
         startActivity(intent);
+        mFirebaseAuth.signOut();
     }
 
+    private void entrar(Nutritionist nutritionist, boolean google) {
+        Intent intent = new Intent(this, NutritionistMenu.class);
+        intent.putExtra("Nutritionist", nutritionist);
+        intent.putExtra("Google", google);
+        startActivity(intent);
+        mFirebaseAuth.signOut();
+    }
 
+    public void enviaApi(Paciente paciente, boolean google) {
+        String url = getString(R.string.web_service_url) + "/user/login";
+        JsonObjectRequest req = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                paciente.json(),
+                (resultado) -> {
+                    try {
+                        paciente.setId(resultado.getInt("iduser"));
+                        paciente.setNome(resultado.getString("fullname"));
+                        paciente.setNascimento(resultado.getString("birthday"));
+                        entrar(paciente, google);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                (excecao) -> {
+                    if (excecao.networkResponse.statusCode == 404) {
+                        if (google) {
+                            enviaApiRegistrerPatient(paciente, google);
+                        } else {
+                            alert("Usuario não encontrado");
+                        }
+                    } else {
+                        alert(getString(R.string.connect_error));
+                        excecao.printStackTrace();
+                    }
+                }
+        );
+        requestQueue.add(req);
+    }
 
-    public void enviaApi(Paciente paciente) {
+    public void enviaApiRegistrerPatient(Paciente paciente, boolean google) {
         String url = getString(
                 R.string.web_service_url
-        ) + "/user/login/";
+        ) + "/user/register/";
         JsonObjectRequest req = new JsonObjectRequest(
                 Request.Method.POST,
                 url,
@@ -178,25 +224,52 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     try {
                         int idUser = resultado.getInt("iduser");
                         paciente.setId(idUser);
-                        entrar(paciente);
+                        entrar(paciente, google);
+                        finish();
                     } catch (JSONException e) {
-                        Toast.makeText(this, "Erro na resposta", Toast.LENGTH_SHORT).show();
+                        alert("Erro na resposta2");
                     }
-
                 },
                 (excecao) -> {
-                    Toast.makeText(
-                            this,
-                            getString(R.string.connect_error),
-                            Toast.LENGTH_SHORT
-                    ).show();
+                    alert(getString(R.string.connect_error));
                     excecao.printStackTrace();
                 }
         );
         requestQueue.add(req);
     }
 
-    public void loginNutritionist(Nutritionist nutritionist){
+
+    public void enviaApiRegistrerNutricionista(Nutritionist nutritionist, boolean google) throws JSONException {
+
+        requestQueue = Volley.newRequestQueue(this);
+        JSONObject user = Util.userObj(nutritionist.getEmail(), nutritionist.getPassword(), "nutritionist", nutritionist.getFullname());
+        String url = getString(
+                R.string.web_service_url
+        ) + "/user/register/";
+        JsonObjectRequest req = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                user,
+                (resultado) -> {
+                    try {
+                        Long idUser = resultado.getLong("iduser");
+                        nutritionist.setIduser(idUser);
+                        entrar(nutritionist, google);
+                        finish();
+                    } catch (JSONException e) {
+                        alert("Erro na resposta2");
+                    }
+                },
+                (excecao) -> {
+                    alert(getString(R.string.connect_error));
+                    excecao.printStackTrace();
+                }
+        );
+        requestQueue.add(req);
+    }
+
+
+    public void loginNutritionist(Nutritionist nutritionist) {
         Intent intent = new Intent(this, NutritionistMenu.class);
         intent.putExtra("Nutritionist", nutritionist);
         startActivity(intent);
@@ -205,7 +278,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private void loginPatient(Patient user, boolean google) {
         Intent intent = new Intent(this, Menu.class);
         intent.putExtra("Paciente", user);
-        intent.putExtra("Google",google);
+        intent.putExtra("Google", google);
         startActivity(intent);
         mFirebaseAuth.signOut();
     }
@@ -233,19 +306,35 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             if (result.isSuccess()) {
                 GoogleSignInAccount account = result.getSignInAccount();
                 //Alterar para mandar para o banco
-                //firebaseLogin(account);
+                try {
+                    firebaseLogin(account);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
-    private void firebaseLogin(GoogleSignInAccount account) {
+    private void firebaseLogin(GoogleSignInAccount account) throws Exception{
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-//                        Paciente paciente = new Paciente(account.getDisplayName(),
-//                                account.getEmail(),account.getId(),"Pacient",null);
-                       // entrar(paciente);
+                        System.out.println("Entrou");
+                        if (patientRButton.isChecked()) {
+                            System.out.println("Paciente");
+                            Paciente paciente = new Paciente(account.getDisplayName(),
+                                    account.getEmail(), account.getId(), null);
+                            entrar(paciente, true);
+                        } else if (nutritionistRButton.isChecked()) {
+                            Nutritionist nutritionist = new Nutritionist(account.getDisplayName(), account.getEmail(), account.getId());
+                            try {
+                                enviaApiRegistrerNutricionista(nutritionist, true);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
                     } else {
                         alert("Falha na autenticação");
                     }
